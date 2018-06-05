@@ -1,0 +1,53 @@
+
+<div  id="LoginH">
+  <body >
+<div class="container">
+
+
+	<section id="content"   >
+
+		<form method="post" action="verificar">
+
+<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"  >
+
+			<h1  id="ti">Proyectos Ulima</h1>
+<div id="inputL">
+      <div class="form-group">
+  <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+  <div class="col-sm-10"  >
+  		<input class="form-control" type="email" placeholder="email" required="" id="useremail"    name="email"   />
+  </div>
+  <div class="form-group">
+     <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+     <div class="col-sm-10">
+      <input  class="form-control" type="password" placeholder="clave" required="" id="password"   name="clave"/>
+     </div>
+   </div>
+</div>
+
+			<div >
+				<input class="btn btn-default"  type="submit" value="Login" id="a1"  onmouseover="checkCookie()"  />
+				<a   class="btn btn-default" href="/login/registrar"  id="a2">Register</a>
+			</div>
+		</form><!-- form -->
+
+
+		<div class="button">
+			<a>
+       <%  if @mensaje==true         %>
+        <a > "Usuario Incorrecto"</a>
+        <%end%>
+   <%  if @mensaje==false         %>
+  <a > "Usuario correcto"</a>
+  <%end%>
+                 </a>
+		</div><!-- button --   >
+	</section><!-- content -->
+
+
+
+</div><!-- container -->
+</body>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/login.css">

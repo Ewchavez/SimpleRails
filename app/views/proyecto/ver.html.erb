@@ -1,0 +1,258 @@
+<link rel="stylesheet" type="text/css" href="/proyecto.css">
+<div class="col-md-10 col-md-push-3">
+  <div id="menu2">
+
+
+<h1>Mis Proyectos  </h1>
+
+
+<div class="tab">
+ <button class="tablinks" onclick="openCity(event, 'London')" >Que soy parte</button>
+ <button class="tablinks" onclick="openCity(event, 'Paris')">Que sigo</button>
+</div>
+
+
+                                             <!--------------TAB1-------------------->
+<div id="London" class="tabcontent">
+
+<button id="myBtn">Crear</button>
+
+  <table class="table table-striped">
+      <thead>
+      <tr>
+        <th> Nombre</th>
+        <th>Rating</th>
+        <th>Curso</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+        <%  for   @pro in  @proyectos        %>
+
+          <tr>
+
+            <td> <%= @pro["pNo"]  %> </td>
+            <td>  <%= @pro["pRa"]  %></td>
+
+            <td>   <%=  @pro["cno"]  %> </td>
+
+              <th></th>
+            <td>
+            <td>   <b id="myBtn2"  value="<%=@pro["pid"]%>" onmouseover="evento(<%=@pro["pid"]%>)" onclick="abrirmodel()" > Crear</b> </td>
+
+
+           <td>  <a  href= "/proyecto/eliminar?@idPro=<%= @pro["pid"] %> ">Eliminar</a>    </td>
+
+
+            </td>
+          </tr>
+
+    <% end %>
+
+      </tbody>
+    </table>
+
+
+
+
+
+</div>
+                                                  <!--------------TAB1-------------------->
+<div id="Paris" class="tabcontent">
+  <table class="table table-striped">
+      <thead>
+      <tr>
+        <th> Nombre</th>
+        <th>Rating</th>
+        <th>Curso</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+        <%  for   @pr in  @siguiendo       %>
+
+          <tr>
+
+            <td> <h9><%= @pr["Sno"]  %></h9> </td>
+            <td> <%= @pr["sra"]  %> </td>
+
+            <td>   <%=  @pr["snoo"]  %> </td>
+
+              <th></th>
+            <td>
+            <td> <label id="<%= @pr["Sno"]  %>,<%= @pr["des"]  %> ,<%= @pr["sid"]  %>"      onclick="abrirmodel3()"     >ver  </label> </td>
+
+
+            <td>  <a  href= "/proyecto/interesado?@idPro=<%= @pr["sid"] %> ">Ya no estoy Interesado</a>    </td>
+
+
+            </td>
+          </tr>
+
+    <% end %>
+
+      </tbody>
+    </table>
+
+
+</div>
+
+
+
+
+    </div>
+
+    </div>
+
+<!-------------------------------Mita1------------------------------------------->
+    <div class="col-md-2 col-md-pull-9">
+Usuario:
+<button  id="Miusuario" type="button" class="btn btn-danger" onclick="eliminar()" ondblclick="logeate()"><%=   @nombrepag%></button>
+
+<div id="barra">
+<h1>Proyectos UL</h1>
+
+<div id= "menubar">
+
+<a href=""  >Mis proyectos</a>
+<br>
+<a href="">Ver proyectos</a>
+<br>
+<HR WIDTH="80%"></HR>
+
+<a href="">Configuracion</a>
+</div>
+
+
+
+ </div>
+
+
+
+    </div>
+
+
+
+
+
+<!-------------------------------Modals------------------------------------------->
+                                 <!---------------ModalCrear------------------------>
+
+<div id="myModal" class="modal">
+
+
+  <div class="modal-content">
+
+    <h1>Guardar Proyecto</h1>
+
+    <form method="get" action="crearp">
+
+
+      <input type="text" class="form-control" placeholder="Nombre" name="nombreP">
+
+        <select class="form-control"  name="cursosele"  >
+          <%  for   @tipo  in  @Cursos%>
+              <option><%= @tipo["nombre"]  %>  </option>
+      <% end %>
+                </select>
+
+        <textarea type="text" class="form-control" placeholder="Comentarios" name="descC"> </textarea>
+        <input type="hidden" class="form-control" placeholder="Nombre" value="" id="IdMiUsuario" name="IdMiUsuario">
+
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </form><!-- form -->
+
+
+<br>
+<br>
+   <a  class="close"  onclick="cerrarP()">Cerrar</a>
+  </div>
+<br>
+</div>
+
+ <!---------------ModalModificar------------------------>
+
+
+ <div id="myModal2" class="modal">
+
+   <div class="modal-content">
+
+     <h1>Modificar Proyecto</h1>
+
+     <form method="get" action="modificar">
+
+       <input type="text" class="form-control" placeholder="Nombre" name="noP">
+
+   <input  class="form-control" value="" placeholder="Ingrese nuevo campo"
+   name="idproyec"  id="ModModi"  type="hidden">
+         <select class="form-control"  name="CursosC"  >
+           <%  for   @tipo  in  @Cursos%>
+               <option><%= @tipo["nombre"]  %>  </option>
+           <% end %>
+                 </select>
+
+         <textarea type="text" class="form-control" placeholder="Comentarios" name="deC"> </textarea>
+
+         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+         </form><!-- form -->
+
+
+
+    <a class="close" onclick="cerrarP()">Cerrar</a>
+   </div>
+
+</div>
+
+ <!---------------ModalVER------------------------>
+
+
+
+  <div id="myModal3" class="modal">
+
+    <div class="modal-content">
+
+      <h1>Ver Proyect</h1>
+
+<div class="container">
+
+
+<input type="text" id="nu1" value="" class="form-control" placeholder="" name="nombre"  readonly  >
+<textarea class="form-control" rows="3"  id="nu2" name="descr" readonly></textarea>
+
+
+<form  action="calificar" method="get" id="formC">
+<input type="hidden" id="idV" value=""  class="form-control"  name="idpro" >
+
+<h1>Calificar</h1>
+  <select class="form-control" id="calificar" name="cali"    >
+    <option onclick="marcado()">1</option>
+    <option onclick="marcado()">2</option>
+    <option onclick="marcado()">3</option>
+    <option onclick="marcado()">4</option>
+    <option onclick="marcado()">5</option>
+  </select>
+</form>
+
+
+<a id="idInter2"  href= "">Ya no estoy Interesado</a>
+
+     <a   class="close"  onclick="cerrarP()">Cerrar</a>
+
+
+</div>
+    </div>
+
+
+ </div>
+
+
+
+
+
+<!-------------------------------javascript------------------------------------------->
+
+<script src="/proyecto.js" charset="utf-8"></script>
+<script src="/model1.js" charset="utf-8"></script>
+<script src="/cookie.js" charset="utf-8"></script>
+
+<!-------------------------------javascript------------Usuario------------------------->
